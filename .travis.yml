@@ -1,0 +1,33 @@
+os:
+- linux
+language: python
+python:
+- 3.7
+branches:
+  except:
+  - gh-pages
+install:
+- pip install tox
+stages:
+- name: lint
+- name: test
+- name: build
+  if: tag =~ ^\d+\.\d+\.\d+$
+- name: docker
+  if: tag =~ ^\d+\.\d+\.\d+$
+script: skip
+jobs:
+  fast_finish: true
+  include:
+  - stage: lint
+    script: tox -e lint
+    python: 3.7
+    name: Lint
+  - stage: test
+    script: tox -e test-py36
+    python: 3.7
+    name: Unit Tests
+  - stage: build
+    python: 3.7
+    name: Build Package
+    script: tox -e build-package
