@@ -76,7 +76,6 @@ kwargs = dict(name='docsclient',
                     "Programming Language :: Python :: 3",
                     "License :: OSI Approved :: MIT License",
                     "Topic :: Software Development :: Documentation",
-                    "Internet :: WWW/HTTP :: WSGI :: Application",
                     "Operating System :: OS Independent",
                     "Programming Language :: Python :: Implementation :: CPython"
                 ],
