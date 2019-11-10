@@ -12,8 +12,6 @@ stages:
 - name: lint
 - name: test
 - name: build
-- name: publish
-  if: tag =~ ^\d+\.\d+\.\d+$
 script: skip
 jobs:
   fast_finish: true
@@ -30,9 +28,6 @@ jobs:
     python: 3.7
     name: Build Package
     script: tox -e build
-  - stage: publish
-    python: 3.7
-    name: Publish Package
     deploy:
       provider: pypi
       skip_existing: true
