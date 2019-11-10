@@ -29,20 +29,19 @@ jobs:
     name: Build Package
     script: tox -e build
     deploy:
-      - provider: pypi
-        skip_existing: true
-        user: djpugh
-        password:
-          secure: UGvX3r6EgxmGHH6eUbZwbQZxMlOKUIivqtEorVVItFU4JjuaOAJvp9OCeylvXWZOtVfOvAHgRb+SiDbrn07ksmLCwgZLNkwzc6oSZ8pwnOS6OE77LlYwlRK+GuWSdEt1Ourn/jVX5Kr3rK6Xo+SSitE7A2H8/UGAjgt67VnYhrm7YaFAyxDHgmnCyzEjkENIob+eA6DpSh/kvjAPYMCKrPnln60+ahKGqwnBQ4cqQ4UE6l50BkFtMT0y3EbhxVQzXsxqeg56PERgohFhKqVnRN0yaR+4SJ1vSEKmLk0FVKexNxFVtTmm5LnX5yT8LB02w4RTKEWrQ1uqtl1LtphcdbtTVH+EUepKLpN6UxS1++FoXDHnFuFASv3/Hx9DHbgDWj6kOZ0NL2icqQqUs/T+bfHLJ36l4NifznK+GYu6vHT5NDv2tXyVCGBBL9WYmkX050v/MBf6vRSkqOaKb6MfVO6wOY7KYMUrMmwo2XCPaClJkPq5ziWpEZ5OvIZ59s6aBDa/ai/X970oNpzDKKUfhIiaDStvVo51C02GYNkNt/W/37q5HA09jbbHScmnKeaJU4SOxV2u8M9pQ84Gt/FGnG9z3q2DPpNqIUk4p4k03dY/j1Lg1fKm2BvoRRRla+1DzzZzqxocf2HH7/J/SX9G4sNSlIIaFFe8uQm4gji3vHk=
-        on:
-          repo: djpugh/docserver-client
-          tags: true
-      - provider: releases
-        api_key:
-          secure: M+FOWcx8JxgEgH9QUJy1yrGCSpDi2rOCZHGw7iNHIpvy5wAQRLh3jp5wsEAFqJzoUlSLCeX/4L2Mzlfsaey8rbnoB/wui8tWuEQrksdssQjSxEZM4BkzGl+mD+nvKjNDY7iBo7WXhMZaItNZrX6Jl/UwTUmnEEgkCNr9ns0Uibfffo991RQy5hZeZqZZHayF/kt9hdZ+WEdxKLQiOZZRmUwi0hd7oPJYqynTY330e3gJS+gpIu1SvUD/bsNAcyXk2eRdZaRQDLd47XSN2RyQ1iABWRMhXeyXVdEVUZnaSjR9OFE0xk6GGiR1VQnQqQ8RmFUmx2DXHVuqx/IJoOicqsrz9A8+koP8CAWADhog0aHgoqVDACShXiWw9m09wPPTGI0CneSFS+fs8PN3zlYRjfWtV9Jp7gcft0sCH0EkqLJEqRyV4Qx6Km2TBHMluDN55EV4nlBEV2xvgi+wOF5T3a7zRpCSbuOzLIsJhJErEU+pnJYQtw2JfZaVvM86IFrGq8RhyDtqNIcyrRZoyxf0awxRtmvMt2WYnkh5RuUf73ps64WXHbmKsWtLqjZOuO0vRj5gtCOSsaDjOOCtcN/I5F56JNWF3UkcPsEGQL7ieZ5hegXPf2bkCeMkmQlcGSXYezN/+MNIKeAIwxpcec3eQuOUAGkt/V3LU4tvG9jaNoI=
-        file: dist/*
-        on:
-          repo: djpugh/docserver-client
-          tags: true
-          condition: $TRAVIS_TAG =~ ^\d+\.\d+\.\d+
-$bash
+    - provider: pypi
+      skip_existing: true
+      user: __token__
+      password:
+        secure: oujh0e1vVrdjRQD6PiUDYtE8Z68ayFlf13EYOKPWH2rur9sNnKm4lLfsiVTbikHOPKExypH4zhdRxIz8XBTgqrwJTQB+6g+gGL+27WYpD4/XG+fynFpMafNb18XOZUHvkrmlDZgM8/dfgI7rc277J1RBGyQICUxlfZnPNrvCTGKdaUlUfAnLxDbAu5h83ouFT+SwuvMsWpZcdvsSCENh+wkyAYIS4J7OtH46K3/9f2Oei3xkB2N1auDO3aQrbyC/2V7BAV3wtYnhGX7UHiTZjuLEuLPw0U8J0OfUMRaQdQis7Q06jbhEeZEXOYGWWvdZ6cRcgQYzBiraPn7JZl3vNTr/2b3lxNuNghbgs6HgXRRTloXvEs1bNhkYdiHr0D6WoDmCzweaDkhvuRaV5jj9kKsuZilM7ExUDGYkdrfAM//TsrHFZhRBFYC1GObxvlQNAqf8ydUtJVQlOQLmZozDZMoXzzIJPC4y8o1OBKHQ2xTyUl4Cc3oTxG9IV+T4J8D5WWyJTcihWSF7G6Uscgnvi5ZD6IKBsh2c0a3E74qx/iegNOV27K68wS5Mb76avO1uCK3mVSMGTTYrcJdRXi7MUipNmpTCosuBwsI+SLf25ot1/eUwIrw/8TagvLD8qMV4H5WVTga8Ftld7BNRZQgYRUzLFBqei/KR/fQknOkyMIw=
+      on:
+        repo: djpugh/docserver-client
+        tags: true
+    - provider: releases
+      api_key:
+        secure: M+FOWcx8JxgEgH9QUJy1yrGCSpDi2rOCZHGw7iNHIpvy5wAQRLh3jp5wsEAFqJzoUlSLCeX/4L2Mzlfsaey8rbnoB/wui8tWuEQrksdssQjSxEZM4BkzGl+mD+nvKjNDY7iBo7WXhMZaItNZrX6Jl/UwTUmnEEgkCNr9ns0Uibfffo991RQy5hZeZqZZHayF/kt9hdZ+WEdxKLQiOZZRmUwi0hd7oPJYqynTY330e3gJS+gpIu1SvUD/bsNAcyXk2eRdZaRQDLd47XSN2RyQ1iABWRMhXeyXVdEVUZnaSjR9OFE0xk6GGiR1VQnQqQ8RmFUmx2DXHVuqx/IJoOicqsrz9A8+koP8CAWADhog0aHgoqVDACShXiWw9m09wPPTGI0CneSFS+fs8PN3zlYRjfWtV9Jp7gcft0sCH0EkqLJEqRyV4Qx6Km2TBHMluDN55EV4nlBEV2xvgi+wOF5T3a7zRpCSbuOzLIsJhJErEU+pnJYQtw2JfZaVvM86IFrGq8RhyDtqNIcyrRZoyxf0awxRtmvMt2WYnkh5RuUf73ps64WXHbmKsWtLqjZOuO0vRj5gtCOSsaDjOOCtcN/I5F56JNWF3UkcPsEGQL7ieZ5hegXPf2bkCeMkmQlcGSXYezN/+MNIKeAIwxpcec3eQuOUAGkt/V3LU4tvG9jaNoI=
+      file: dist/*
+      on:
+        repo: djpugh/docserver-client
+        tags: true
+        condition: "$TRAVIS_TAG =~ ^\\d+\\.\\d+\\.\\d+"
