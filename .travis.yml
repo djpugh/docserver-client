@@ -29,15 +29,25 @@ jobs:
   - stage: build
     python: 3.7
     name: Build Package
-    script: tox -e build-package
+    script: tox -e build
   - stage: publish
     python: 3.7
     name: Publish Package
     deploy:
       provider: pypi
+      skip_existing: true
       user:
         secure: bUR4u93SA+avNZErmVPay7tFAeZJasBUhsz6vTJ+R5PZZ+z7F3+DC/EFLZhRiPELrk3gfjgcjWU4jf8Gbq/ODWLxxUgV0ZxxWx06FNkSYi+qk6Wee07zTpHrhGmIZEGW+Sl7XpWPqBJWC41exPg/2jD+qnDuu1Fb9WrcbyPF0BXSrhDQnKCShuvsZG/6RKOSxS7lZKXcpEelrZ+AibBmTHe2es3QDzZoZiywRMenrGcUh8vR0vohYRTdIkQo9zlhfwH7/QbtgtYC7QvufCFriX5+X0Z4/GoFfb+55hdv4BPkgsj4yhCA7b7DgBF8JzaALykmg6e4tUXLmxQuFqsOQnHty+NR9L0lEWVlmlewFUFpv+hyNN20KCx5f0TYR4nN+qRjiSysk8anlqyFx8Sliud4bbmUhy3npb7I+LScf5ruPBuJuVJA2csN8FbUm5hMrtrzqpuinz9BCV1T0iHxVUcSQHOBLUsbh6JPM2D1Y2kXTxsuRZ1caPaG/GxVIMF6A/rntgW+dZXzMNzBkznfKkaOX4HvkN0T7m5ISfhW1c6IpW7Nc1F8mfLp7TsmIWoyHUA84SX5NyjngQyjGuCFA5K3J6EOJFblPWvPbYSat3dp88B2bJUWy2eRdfXJ5eOi79DbQGGYNJMu/onGQk6gTevV7qjUi7uTXY28MQzfwlU=
       password:
         secure: UGvX3r6EgxmGHH6eUbZwbQZxMlOKUIivqtEorVVItFU4JjuaOAJvp9OCeylvXWZOtVfOvAHgRb+SiDbrn07ksmLCwgZLNkwzc6oSZ8pwnOS6OE77LlYwlRK+GuWSdEt1Ourn/jVX5Kr3rK6Xo+SSitE7A2H8/UGAjgt67VnYhrm7YaFAyxDHgmnCyzEjkENIob+eA6DpSh/kvjAPYMCKrPnln60+ahKGqwnBQ4cqQ4UE6l50BkFtMT0y3EbhxVQzXsxqeg56PERgohFhKqVnRN0yaR+4SJ1vSEKmLk0FVKexNxFVtTmm5LnX5yT8LB02w4RTKEWrQ1uqtl1LtphcdbtTVH+EUepKLpN6UxS1++FoXDHnFuFASv3/Hx9DHbgDWj6kOZ0NL2icqQqUs/T+bfHLJ36l4NifznK+GYu6vHT5NDv2tXyVCGBBL9WYmkX050v/MBf6vRSkqOaKb6MfVO6wOY7KYMUrMmwo2XCPaClJkPq5ziWpEZ5OvIZ59s6aBDa/ai/X970oNpzDKKUfhIiaDStvVo51C02GYNkNt/W/37q5HA09jbbHScmnKeaJU4SOxV2u8M9pQ84Gt/FGnG9z3q2DPpNqIUk4p4k03dY/j1Lg1fKm2BvoRRRla+1DzzZzqxocf2HH7/J/SX9G4sNSlIIaFFe8uQm4gji3vHk=
       on:
-        repo: djpugh/docserver
+        repo: djpugh/docserver-client
+        tags: true
+    deploy:
+      provider: releases
+      api_key:
+        secure: M+FOWcx8JxgEgH9QUJy1yrGCSpDi2rOCZHGw7iNHIpvy5wAQRLh3jp5wsEAFqJzoUlSLCeX/4L2Mzlfsaey8rbnoB/wui8tWuEQrksdssQjSxEZM4BkzGl+mD+nvKjNDY7iBo7WXhMZaItNZrX6Jl/UwTUmnEEgkCNr9ns0Uibfffo991RQy5hZeZqZZHayF/kt9hdZ+WEdxKLQiOZZRmUwi0hd7oPJYqynTY330e3gJS+gpIu1SvUD/bsNAcyXk2eRdZaRQDLd47XSN2RyQ1iABWRMhXeyXVdEVUZnaSjR9OFE0xk6GGiR1VQnQqQ8RmFUmx2DXHVuqx/IJoOicqsrz9A8+koP8CAWADhog0aHgoqVDACShXiWw9m09wPPTGI0CneSFS+fs8PN3zlYRjfWtV9Jp7gcft0sCH0EkqLJEqRyV4Qx6Km2TBHMluDN55EV4nlBEV2xvgi+wOF5T3a7zRpCSbuOzLIsJhJErEU+pnJYQtw2JfZaVvM86IFrGq8RhyDtqNIcyrRZoyxf0awxRtmvMt2WYnkh5RuUf73ps64WXHbmKsWtLqjZOuO0vRj5gtCOSsaDjOOCtcN/I5F56JNWF3UkcPsEGQL7ieZ5hegXPf2bkCeMkmQlcGSXYezN/+MNIKeAIwxpcec3eQuOUAGkt/V3LU4tvG9jaNoI=
+      file: dist/*
+      on:
+        repo: djpugh/docserver-client
+        tags: true
