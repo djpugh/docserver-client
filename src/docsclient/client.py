@@ -55,14 +55,19 @@ class Client:
         logger.debug(f'Using values: {values}')
         response = requests.post(f'{self.base_url}/api/docs/upload', data=values,
                                  headers={'Authorization': f'Bearer {self.token}'})
+
+        logger.debug(f'Request: {response.request.method} {response.request.url} {response.request.headers} {response.request.body[:100]}')
         logger.debug(f'Result: {response.content}')
         response.raise_for_status()
-        upload_url = response.content.decode().split('Location: ')[1][:-1]
+        upload_url = response.content.decode().split('Location: ')[1][:-1].replace('http://', f'{self.protocol}://').replace('https://', f'{self.protocol}://')
         logger.debug(f'Uploading package to: {upload_url}')
         response = requests.put(upload_url, files={'documentation': ('docs-upload.zip', open(zipfile, 'rb').read())},
                                 headers={'Authorization': f'Bearer {self.token}'})
+
+        logger.debug(f'Request: {response.request.method} {response.request.url} {response.request.headers} {response.request.body[:100]}')
         logger.debug(f'Result: {response.content}')
         response.raise_for_status()
+        logger.info(f'Upload Complete')
         return response
 
     def upload_dir(self, html_path, name, version, repository, tags=None, working_dir=None):
