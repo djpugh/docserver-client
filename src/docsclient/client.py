@@ -64,7 +64,7 @@ class Client:
         response = requests.put(upload_url, files={'documentation': ('docs-upload.zip', open(zipfile, 'rb').read())},
                                 headers={'Authorization': f'Bearer {self.token}'})
 
-        logger.debug(f'Request: {response.request.method} {response.request.url} {response.request.headers} {response.request.body[:100]}')
+        logger.debug(f'Request: {response.request.method} {response.request.url} {response.request.headers} {response.request.body[:1000]}')
         logger.debug(f'Result: {response.content}')
         response.raise_for_status()
         logger.info(f'Upload Complete')
