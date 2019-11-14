@@ -56,7 +56,7 @@ class Client:
         response = requests.post(f'{self.base_url}/api/docs/upload', data=values,
                                  headers={'Authorization': f'Bearer {self.token}'})
 
-        logger.debug(f'Request: {response.request.method} {response.request.url} {response.request.headers} {response.request.body[:100]}')
+        logger.debug(f'Request: {response.request.method} {response.request.url} {response.request.headers} {response.request.body[:1000]}')
         logger.debug(f'Result: {response.content}')
         response.raise_for_status()
         upload_url = response.content.decode().split('Location: ')[1][:-1].replace('http://', f'{self.protocol}://').replace('https://', f'{self.protocol}://')
