@@ -1,3 +1,4 @@
+"""Provide a client for docserver (djpugh.github.io/docserver)."""
 from datetime import datetime
 
 from docsclient.client import Client  # noqa F401

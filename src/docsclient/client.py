@@ -1,3 +1,4 @@
+"""Docserver client object."""
 import json
 import logging
 import os
@@ -10,8 +11,10 @@ logger = logging.getLogger(__name__)
 
 
 class Client:
+    """The base docserver client object."""
 
     def __init__(self, host, port=None, protocol='https', authenticator: Union[Any, str] = None, headers: Optional[Dict[str, str]] = None):
+        """Initialise the client."""
         self.host = host
         self.port = port
         self.protocol = protocol
@@ -56,24 +59,26 @@ class Client:
         """Get a requests session with authentication if provided."""
         if self._upload_session is None:
             if self.__upload_token is None:
-                self.get_upload_token()
+                self._get_upload_token()
             self._upload_session = self._make_session(self._headers.copy(), self.__upload_token)
         return self._upload_session
 
     @property
     def base_url(self):
+        """The Base URL for the docserver instance."""
         if self.port:
             return f'{self.protocol}://{self.host}:{self.port}'
         else:
             return f'{self.protocol}://{self.host}'
 
-    def get_upload_token(self):
+    def _get_upload_token(self):
         r = self.session.get(f'{self.base_url}/api/auth/token/upload')
         r.raise_for_status()
         self.__upload_token = r.json()['access_token']
 
     @staticmethod
     def create_zipfile(html_path, working_dir=None):
+        """Create a zipfile from a directory."""
         if working_dir is None:
             working_dir = os.getcwd()
         logger.debug(f'Creating zipfile in: {working_dir}')
@@ -88,6 +93,7 @@ class Client:
         return zip_fname
 
     def upload_zipfile(self, zipfile, name, version, repository, tags=None, ):
+        """Upload a zipfile with version, repo and tags info."""
         if tags is None:
             tags = list()
         logger.debug(f'Uploading zipfile: {zipfile}')
@@ -108,8 +114,9 @@ class Client:
         logger.debug(f'Request: {response.request.method} {response.request.url} {response.request.headers} {response.request.body[:1000]}')
         logger.debug(f'Result: {response.content}')
         response.raise_for_status()
-        logger.info(f'Upload Complete')
+        logger.info('Upload Complete')
         return response
 
     def upload_dir(self, html_path, name, version, repository, tags=None, working_dir=None):
+        """Zip a  directory and upload it with version, repo and tags info."""
         self.upload_zipfile(self.create_zipfile(html_path, working_dir), name, version, repository, tags)
