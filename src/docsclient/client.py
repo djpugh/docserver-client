@@ -21,7 +21,7 @@ class Client:
         if headers is None:
             headers = {}
         self._headers = headers
-        if hasattr(authenticator, 'session'):
+        if authenticator and not isinstance(authenticator, str) and hasattr(authenticator, 'session'):
             self._headers.update(authenticator.session.headers)
         elif isinstance(authenticator, str):
             # Assume this is a token
