@@ -31,3 +31,5 @@ env
 docker-build
 docker-html-help
 Pipfile
+.vscode
+test-reports/*
